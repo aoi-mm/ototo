@@ -229,22 +229,28 @@ body {
   /* スクロール案内の右に横線を引く */
 }
 
-/* 【Hero - CTA ボタン】 */
+/* 【Hero - Contact Usボタン】 */
 .hero-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 62px;
+  padding: 2px;
+  border: 2px solid transparent;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   opacity: 1;
+  transition: border-color 0.25s ease, gap 0.25s ease, padding 0.25s ease, opacity 0.25s ease;
 }
 
 .hero-cta-text {
-  min-width: 156px;
-  padding: 0 32px;
+  min-width: 128px;
+  padding: 0 24px;
   border: 2px solid currentColor;
   border-radius: 999px;
+  transition: border-color 0.25s ease, padding 0.25s ease;
 }
 
 .hero-cta-text,
@@ -260,7 +266,7 @@ body {
   padding: 0;
   border: 1px solid currentColor;
   border-radius: 50%;
-  font-size: 28px;
+  font-size: 0;
   line-height: 1;
   font-family: inherit;
   transform: none;
@@ -269,16 +275,40 @@ body {
   transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Contact Usボタン: 矢印は画像ではなくCSSの文字で表示 */
+.hero-cta-icon::before {
+  content: "↗";
+  font-size: 28px;
+  transition: transform 0.25s ease;
+}
+
 .hero-cta:hover,
 .hero-cta:focus-visible {
+  gap: 0;
+  padding: 2px 2px 2px 24px;
+  border-color: currentColor;
   opacity: 1;
+}
+
+.hero-cta:hover .hero-cta-text,
+.hero-cta:focus-visible .hero-cta-text {
+  padding: 0 16px 0 0;
+  border-color: transparent;
 }
 
 .hero-cta:hover .hero-cta-icon,
 .hero-cta:focus-visible .hero-cta-icon {
   background: var(--color-white);
   color: var(--color-black);
-  transform: translate(3px, -3px);
+  border-color: var(--color-white);
+  transform: translate(0, 0);
+}
+
+/* Contact Usボタン: ホバー時は矢印を横向きにして右へ動かす */
+.hero-cta:hover .hero-cta-icon::before,
+.hero-cta:focus-visible .hero-cta-icon::before {
+  content: "→";
+  transform: translateX(5px);
 }
 
 /* ========================
@@ -577,7 +607,17 @@ body {
    ======================================== */
 @media (max-width: 900px) {
   .site-header {
-    padding-left: 22px;
+    left: auto;
+    right: var(--page-padding);
+    width: auto;
+    height: 60px;
+    padding: 6px 8px 6px 18px;
+    gap: 18px;
+    background: var(--color-white);
+    color: var(--color-black);
+    border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
   }
 
   .global-nav {
@@ -585,12 +625,42 @@ body {
     /* ナビを非表示 */
   }
 
+  /* Header: レスポンシブ時はロゴ文字を丸い装飾に置き換える */
+  .site-logo {
+    font-size: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #aaa497;
+  }
+
+  /* Header: レスポンシブ時の黒い丸いハンバーガーボタン */
   .menu-button {
-    display: grid;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 48px;
     height: 48px;
-    margin-left: auto;
+    margin-left: 0;
+    gap: 6px;
+    background: var(--color-black);
+    border: 0;
+    border-radius: 50%;
+    box-shadow: none;
     /* ハンバーガーメニュー表示 */
+  }
+
+  /* Header: ハンバーガーの白い2本線 */
+  .menu-button span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-white);
+  }
+
+  /* Header: 3本目の線は使わず、2本線の見た目にする */
+  .menu-button span:nth-child(3) {
+    display: none;
   }
 
   .hero {
@@ -662,22 +732,54 @@ body {
 
   .site-header {
     top: 14px;
+    left: auto;
+    right: 18px;
+    width: auto;
     height: 60px;
-    padding: 0 8px 0 18px;
+    padding: 6px 8px 6px 18px;
+    gap: 18px;
+    background: var(--color-white);
+    color: var(--color-black);
+    border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
   }
 
+  /* Header: スマホ時もロゴ文字を丸い装飾に置き換える */
   .site-logo {
-    font-size: 22px;
+    font-size: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #aaa497;
   }
 
+  /* Header: スマホ時の黒い丸いハンバーガーボタン */
   .menu-button {
-    display: grid;
-    width: 42px;
-    height: 42px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-left: 0;
+    gap: 6px;
+    background: var(--color-black);
+    border: 0;
+    border-radius: 50%;
+    box-shadow: none;
   }
 
+  /* Header: スマホ時のハンバーガーの白い2本線 */
   .menu-button span {
-    width: 16px;
+    width: 24px;
+    height: 2px;
+    background: var(--color-white);
+  }
+
+  /* Header: スマホ時も3本目の線は非表示 */
+  .menu-button span:nth-child(3) {
+    display: none;
   }
 
   /* ========================
@@ -749,6 +851,10 @@ body {
 
   .hero-cta-icon {
     width: 48px;
+    font-size: 24px;
+  }
+
+  .hero-cta-icon::before {
     font-size: 24px;
   }
 
