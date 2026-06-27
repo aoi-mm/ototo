@@ -17,11 +17,11 @@
   <header class="site-header" aria-label="サイトヘッダー">
     <a class="site-logo" href="./index.html" aria-label="OTOTO トップページ">OTOTO</a>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
-      <a href="./about.html">ABOUT</a>
-      <a href="./work.html">WORK</a>
-      <a href="./contact.html">CONTACT</a>
+      <a href="#about-title">ABOUT</a>
+      <a href="#work-title">WORK</a>
+      <a href="mailto:info@ototo.studio">CONTACT</a>
     </nav>
-    <button class="menu-button" type="button" aria-label="メニューを開く">
+    <button class="menu-button" type="button" aria-label="メニューを開く" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -45,7 +45,7 @@
           <p class="hero-text">内装工事を中心に、空間に合わせた<br>木製スピーカーの制作まで。<br>ひとつの空間を、見えてくるものと<br>聴こえるものから整えます。</p>
         </div>
         <div class="hero-bottom">
-          <a class="hero-cta" href="./contact.html" aria-label="お問い合わせページへ移動">
+          <a class="hero-cta" href="mailto:info@ototo.studio" aria-label="メールでお問い合わせ">
             <span class="hero-cta-text">Contact Us</span>
             <span class="hero-cta-icon">↗</span>
           </a>
@@ -62,19 +62,25 @@
         <span></span>
       </div>
       <div class="work-grid">
-        <a class="work-card work-card--interior" href="./work.html#interior-renovation">
-          <img src="./assets/topwork01.png" alt="木の梁と窓のあるリノベーション空間">
+        <a class="work-card work-card--interior" href="#work-title">
+          <div class="work-card-image-wrap">
+            <img class="work-card-image work-card-image--default" src="./assets/topwork01.png" alt="木の梁と窓のあるリノベーション空間">
+            <img class="work-card-image work-card-image--hover" src="./assets/work-interior.webp" alt="ホバー時に表示する内装空間の写真">
+          </div>
           <h3>INTERIOR RENOVATION</h3>
           <p>古い建物の魅力を活かしながら、暮らしに寄り添う空間へ。<br>設計から施工まで一貫して行います。</p>
         </a>
-        <a class="work-card work-card--speaker" href="./work.html#wooden-speakers">
-          <img src="./assets/top.png" alt="棚に置かれた木製スピーカー">
+        <a class="work-card work-card--speaker" href="#work-title">
+          <div class="work-card-image-wrap">
+            <img class="work-card-image work-card-image--default" src="./assets/top.png" alt="棚に置かれた木製スピーカー">
+            <img class="work-card-image work-card-image--hover" src="./assets/43CF8457-3048-48CD-8A2D-0B1BA6E02F84.JPG" alt="ホバー時に表示するスピーカーの写真">
+          </div>
           <h3>WOODEN SPEAKERS</h3>
           <p>素材と音の響きにこだわり、ひとつひとつ手仕事で制作。<br>空間に自然と馴染む音をつくります。</p>
         </a>
       </div>
       <div class="section-cta">
-        <a href="./work.html" class="more-link">More <span>→</span></a>
+        <a href="#work-title" class="more-link">More <span>→</span></a>
       </div>
     </section>
 
@@ -98,7 +104,7 @@
         </div>
       </div>
       <div class="section-cta">
-        <a href="./about.html" class="more-link">More <span>→</span></a>
+        <a href="#about-title" class="more-link">More <span>→</span></a>
       </div>
     </section>
   </main>
@@ -128,19 +134,14 @@
           <path d="M4 7l8 6 8-6"/>
         </svg>
       </a>
-      <a class="footer-icon footer-icon--instagram" href="#" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <rect x="4" y="4" width="16" height="16" rx="5" ry="5"/>
-          <path d="M16.5 7.5h.01"/>
-          <circle cx="12" cy="12" r="3.5"/>
-        </svg>
-      </a>
     </div>
   </footer>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const headings = document.querySelectorAll('.section-heading');
       const header = document.querySelector('.site-header');
+      const menuButton = document.querySelector('.menu-button');
+      const globalNav = document.querySelector('.global-nav');
 
       if (header) {
         const updateHeader = () => {
@@ -149,6 +150,20 @@
 
         updateHeader();
         window.addEventListener('scroll', updateHeader);
+      }
+
+      if (menuButton && globalNav) {
+        menuButton.addEventListener('click', () => {
+          const isOpen = header.classList.toggle('is-menu-open');
+          menuButton.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        globalNav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            header.classList.remove('is-menu-open');
+            menuButton.setAttribute('aria-expanded', 'false');
+          });
+        });
       }
 
       if (!headings.length) return;

@@ -90,7 +90,6 @@ body {
 .global-nav a,
 .section-heading a,
 .hero-cta,
-.work-card,
 .sns-link {
   transition: opacity 0.25s ease;
 }
@@ -98,7 +97,6 @@ body {
 .global-nav a:hover,
 .section-heading a:hover,
 .hero-cta:hover,
-.work-card:hover,
 .sns-link:hover {
   opacity: 0.6;
   /* クリック時、透明度が60%になる */
@@ -121,6 +119,7 @@ body {
   width: 19px;
   height: 1px;
   background: currentColor;
+  transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
 /* ========================
@@ -381,6 +380,12 @@ body {
   text-transform: uppercase;
 }
 
+/* ページ内リンク移動時に、固定ヘッダーで見出しが隠れないようにする */
+#work-title,
+#about-title {
+  scroll-margin-top: 120px;
+}
+
 .section-heading span {
   width: 100%;
   margin-right: 40px;
@@ -411,35 +416,57 @@ body {
 
 .work-card {
   position: relative;
-  overflow: hidden;
-  min-height: 620px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.work-card--interior img,
-.work-card--speaker img {
+.work-card-image-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Work: 通常画像とホバー画像を同じ位置に重ねる */
+.work-card-image {
+  display: block;
   width: 100%;
   height: 380px;
   object-fit: cover;
   flex-shrink: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.work-card--speaker img {
+.work-card-image--hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.work-card:hover .work-card-image--default,
+.work-card:focus-visible .work-card-image--default {
+  opacity: 0;
+}
+
+.work-card:hover .work-card-image--hover,
+.work-card:focus-visible .work-card-image--hover {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.work-card--speaker .work-card-image--default {
   object-position: center 30%;
 }
 
-.work-card--interior,
-.work-card--speaker {
-  min-height: auto;
+.work-card--speaker .work-card-image--hover {
+  object-position: center 45%;
 }
 
-.work-card img {
-  display: block;
+.work-card--interior .work-card-image--hover {
+  object-position: center;
 }
 
-..work-card h3 {
+.work-card h3 {
   margin: 20px 0 0;
   font-size: clamp(18px, 1.5vw, 23px);
   font-weight: 600;
@@ -621,8 +648,34 @@ body {
   }
 
   .global-nav {
-    display: none;
-    /* ナビを非表示 */
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    display: grid;
+    min-width: 190px;
+    gap: 0;
+    padding: 14px 0;
+    background: var(--color-white);
+    color: var(--color-black);
+    border-radius: 24px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    /* Header: レスポンシブ時はボタン操作で開くメニューにする */
+  }
+
+  .site-header.is-menu-open .global-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .global-nav a {
+    padding: 12px 22px;
+    font-size: 12px;
+    letter-spacing: 0.16em;
   }
 
   /* Header: レスポンシブ時はロゴ文字を丸い装飾に置き換える */
@@ -632,6 +685,11 @@ body {
     height: 44px;
     border-radius: 50%;
     background: #aaa497;
+  }
+
+  .site-header.is-scrolled {
+    background: var(--color-white);
+    color: var(--color-black);
   }
 
   /* Header: レスポンシブ時の黒い丸いハンバーガーボタン */
@@ -661,6 +719,14 @@ body {
   /* Header: 3本目の線は使わず、2本線の見た目にする */
   .menu-button span:nth-child(3) {
     display: none;
+  }
+
+  .site-header.is-menu-open .menu-button span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .site-header.is-menu-open .menu-button span:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
   }
 
   .hero {
@@ -866,6 +932,11 @@ body {
 
   .work-grid {
     gap: 34px;
+  }
+
+  .work-card-image {
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
   .work-card h3 {
