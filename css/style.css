@@ -20,7 +20,8 @@
   --header-height: 50px;
   --page-padding: clamp(20px, 4.5vw, 56px);
   --section-gap: clamp(20px, 8vw, 96px);
-  --font-sans: "Helvetica Neue", Arial, "Noto Sans JP", "Yu Gothic", sans-serif;
+  --font-en: "Space Grotesk", sans-serif;
+  --font-jp: "Host Grotesk", "Noto Sans JP", sans-serif;
 }
 
 /* ========================
@@ -30,7 +31,7 @@
 body {
   background: var(--color-offwhite);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-jp);
   font-size: 14px;
   line-height: 1.75;
   letter-spacing: 0.04em;
@@ -69,6 +70,7 @@ body {
 
 /* 【Header - ロゴ】 */
 .site-logo {
+  font-family: var(--font-en);
   font-size: clamp(18px, 2.2vw, 24px);
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -82,6 +84,7 @@ body {
   display: flex;
   align-items: center;
   gap: clamp(40px, 6vw, 92px);
+  font-family: var(--font-en);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -173,6 +176,7 @@ body {
 /* 【Hero - 大きなタイトル】 */
 .hero-title {
   margin: 0 0 32px;
+  font-family: var(--font-en);
   font-size: 86px;
   font-weight: 700;
   line-height: 0.93;
@@ -182,6 +186,7 @@ body {
 /* 【Hero - 小見出し】 */
 .hero h1 {
   margin: 0 0 24px;
+  font-family: var(--font-jp);
   font-size: clamp(22px, 2vw, 32px);
   font-weight: 400;
   line-height: 1.7;
@@ -191,6 +196,7 @@ body {
 /* 【Hero - 本文】 */
 .hero-text {
   margin: 0;
+  font-family: var(--font-jp);
   font-size: 14px;
   line-height: 2.1;
   letter-spacing: 0.09em;
@@ -237,6 +243,7 @@ body {
   padding: 2px;
   border: 2px solid transparent;
   border-radius: 999px;
+  font-family: var(--font-en);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -359,6 +366,7 @@ body {
 
 .section-heading h2 {
   margin: 0 40px 0 0;
+  font-family: var(--font-en);
   font-size: clamp(40px, 5vw, 50px);
   font-weight: 700;
   line-height: 1;
@@ -378,6 +386,7 @@ body {
 }
 
 .section-heading a {
+  font-family: var(--font-en);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -426,6 +435,7 @@ body {
 
 .work-card h3 {
   margin: 20px 0 0;
+  font-family: var(--font-en);
   font-size: clamp(18px, 1.5vw, 23px);
   font-weight: 600;
   line-height: 1.1;
@@ -435,6 +445,7 @@ body {
 .work-card p {
   margin: 0;
   max-width: 520px;
+  font-family: var(--font-jp);
   font-size: 14px;
   line-height: 1.9;
   letter-spacing: 0.04em;
@@ -494,6 +505,7 @@ body {
 
 .about-text {
   max-width: 570px;
+  font-family: var(--font-jp);
   font-size: 14px;
   line-height: 2.05;
   letter-spacing: 0.06em;
@@ -532,6 +544,7 @@ body {
 
 .footer-brand a {
   color: var(--color-black);
+  font-family: var(--font-en);
   font-size: 24px;
   line-height: 1;
   letter-spacing: 0.04em;
